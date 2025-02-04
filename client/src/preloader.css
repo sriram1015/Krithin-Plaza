@@ -5,12 +5,12 @@
 	padding: 0;
 }
 :root {
-	--hue: 223;
-	--bg: hsl(var(--hue),10%,90%);
-	--fg: hsl(var(--hue),10%,10%);
-	--primary: hsl(var(--hue),90%,55%);
+	--hue: 150; /* Adjusted hue for brighter colors */
+	--bg: hsl(var(--hue), 20%, 90%); /* Bright background */
+	--fg: hsl(var(--hue), 100%, 10%); /* Darker foreground for contrast */
+	--primary: hsl(var(--hue), 100%, 60%); /* Brighter primary color */
 	--trans-dur: 0.3s;
-	font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320));
+	font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320px));
 }
 body {
 	background-color: var(--bg);
@@ -29,14 +29,14 @@ body {
 	width: 100%;
 }
 .preloader__text {
-	position: relative;
-	height: 1.5em;
+	position: top;
+	height: 2em;
 }
 .preloader__msg {
 	animation: msg 0.3s 13.7s linear forwards;
-	position: absolute;
+	position: top;
 	width: 100%;
-	color:red;
+	color: red; /* Brighter text color */
 }
 .preloader__msg--last {
 	animation-direction: reverse;
@@ -45,9 +45,9 @@ body {
 }
 .cart {
 	display: block;
-	margin: 0 auto 1.5em auto;
-	width: 8em;
-	height: 8em;
+	
+	width: 15em;
+	height: 20em;
 }
 .cart__lines,
 .cart__top,
@@ -73,21 +73,21 @@ body {
 	transform-origin: 102px 111px;
 }
 .cart__wheel-stroke {
-	animation-name: cartWheelStroke
+	animation-name: cartWheelStroke;
 }
 .cart__track {
-	stroke: hsla(var(--hue),10%,10%,0.1);
+	stroke: hsla(var(--hue), 100%, 10%, 0.1); /* Bright track stroke */
 	transition: stroke var(--trans-dur);
 }
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
 	:root {
-		--bg: hsl(var(--hue),10%,10%);
-		--fg: hsl(var(--hue),10%,90%);
+		--bg: hsl(var(--hue), 100%, 20%); /* Dark background in bright hue */
+		--fg: hsl(var(--hue), 100%, 80%); /* Lighter foreground for contrast */
 	}
 	.cart__track {
-		stroke: hsla(var(--hue),10%,90%,0.1);
+		stroke: hsla(var(--hue), 100%, 80%, 0.1);
 	}
 }
 
