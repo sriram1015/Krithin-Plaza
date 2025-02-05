@@ -1,0 +1,5 @@
+for forntend
+rm -rf node_modules package-lock.json  # On Mac/Linux
+rd /s /q node_modules package-lock.json  # On Windows
+npm install
+npm run dev
