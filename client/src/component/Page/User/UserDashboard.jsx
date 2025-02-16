@@ -44,7 +44,7 @@ const UserDashboard = ({ children }) => {
                 </div>
 
                 {/* Main content area */}
-                <div className={`flex-1 bg-white min-h-screen ${isOpen ? 'pl-40' : 'pl-20'}`}> {/* Adjust padding based on sidebar width */}
+                <div className={`flex-1 bg-white min-h-screen pl-16 m-[5vh] ${isOpen ? 'pl-32' : 'pl-16'}`}> {/* Adjust padding based on sidebar width */}
                     {children}
                 </div>
             </section>
