@@ -11,11 +11,11 @@ import { FcAbout } from "react-icons/fc";
 const UserDashboard = ({ children }) => {
     const menu = [
         { name: 'Home', link: '/', icon: IoIosHome },
-        { name: 'Cart', link: '/cart', icon: GiShoppingCart },
+        { name: 'Cart', link: '/adminsignup', icon: GiShoppingCart },
         { name: 'About', link: '/about', icon: FcAbout },
         { name: 'Setting', link: '/setting', icon: IoSettings },
         { name: 'Profile', link: '/profile', icon: CgProfile },
-        { name: 'Logout', link: '/logout', icon: IoLogOut, margin: true }
+        { name: 'Logout', link: '/admin', icon: IoLogOut, margin: true }
     ];
 
     const [isOpen, setIsOpen] = useState(true);
