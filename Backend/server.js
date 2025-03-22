@@ -1,24 +1,32 @@
 const express = require('express');
-const cors=require('cors');
-const connectdb=require('./DB/db');
-const admin=require('./Router/Admin');
-const Cart=require('./Router/Cart');
-const User=require('./Router/User');
-const product=require('./Router/Productdetails');
-const addproduct=require('./Router/AddProduct');
+const cors = require('cors');
+const connectDB = require('./DB/db');
 const bodyParser = require('body-parser');
 
-const app=express();
-const port =5002;
+const adminRoutes = require('./Router/Admin');
+const cartRoutes = require('./Router/Cart');
+const userRoutes = require('./Router/User');
+const productRoutes = require('./Router/Productdetails');
+const addProductRoutes = require('./Router/AddProduct');
+
+const app = express();
+const port = 5002;
+
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-connectdb();
+// Connect to MongoDB
+connectDB();
 
+// Routes
+app.use('/auth', adminRoutes);
+app.use('/cart', cartRoutes);
+app.use('/user', userRoutes);
+app.use('/products', productRoutes);
+app.use('/add-product', addProductRoutes);
 
-app.use('/auth', authRoutes);
-app.use('/add', addrole);
-
+// Start Server
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}.....✅`);
-  });
+    console.log(`Server running on http://localhost:${port} ✅`);
+});

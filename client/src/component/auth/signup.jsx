@@ -1,24 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css"; // Import the CSS file
+import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
+import "./LoginPage.css"; 
 
-const LoginPage = () => {
-  const [User,setUser]=useState("");
+const urlapi = "http://localhost:5002"; // Add your API endpoint
+
+const RegisterPage = () => {
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [number,setNumber]=useState("");
+  const [number, setNumber] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = () => {
-    if (!email || !password) {
-      toast.error("Please enter both email and password.");
+  const handleRegister = async (e) => {
+    e.preventDefault();
+  
+    if (!user || !email || !password || !number) {
+      toast.error("⚠️ All fields are required!", { position: "top-center" });
       return;
     }
-    toast.error("Registered Successful! Redirecting...");
-    navigate("/");
+  
+    try {
+      const response = await axios.post(`${urlapi}/user/register`, {
+        username: user,
+        email,
+        password,
+        phone: number,
+      });
+  
+      console.log("Response:", response.data); // Debugging
+      toast.loading('Loading.....');
+      toast.success("Registration successful! Redirecting...", {
+        position: "top-center",
+      });
+  
+      setTimeout(() => navigate("/"), 2000);
+    } catch (error) {
+      console.error("Registration Error:", error.response?.data || error.message);
+      toast.error(` ${error.response?.data?.error || "Registration failed!"}`, {
+        position: "top-center",
+      });
+    }
   };
-
   
 
   return (
@@ -26,7 +50,7 @@ const LoginPage = () => {
       <div className="login-box">
         {/* Left Side - Image */}
         <div className="login-image">
-          <img src="https://cdni.iconscout.com/illustration/premium/thumb/login-illustration-download-in-svg-png-gif-file-formats--account-forgot-security-password-access-lock-pack-crime-illustrations-3805752.png" alt="Login Illustration" />
+          <img src="https://cdni.iconscout.com/illustration/premium/thumb/login-illustration-download-in-svg-png-gif-file-formats--account-forgot-security-password-access-lock-pack-crime-illustrations-3805752.png" alt="Register Illustration" />
           <div className="background-shapes"></div>
         </div>
 
@@ -35,12 +59,13 @@ const LoginPage = () => {
           <h1>Krithin Plaza</h1>
           <h2>Create an Account</h2>
 
+          {/* Username Input */}
           <div className="input-group">
             <span className="icon">👤</span>
             <input
-              type="name"
-              placeholder="User Name"
-              value={User}
+              type="text"
+              placeholder="Username"
+              value={user}
               onChange={(e) => setUser(e.target.value)}
             />
           </div>
@@ -66,17 +91,19 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
+          {/* Phone Number Input */}
           <div className="input-group">
             <span className="icon">📞</span>
             <input
-              type="number"
+              type="tel"
               placeholder="Phone Number"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
             />
           </div>
 
-          {/* Login Button */}
+          {/* Register Button */}
           <button onClick={handleRegister} className="login-button">
             REGISTER
           </button>
@@ -87,4 +114,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
