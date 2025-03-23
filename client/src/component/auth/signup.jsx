@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import "./LoginPage.css"; 
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth,db } from "./Firebase";
+import { setDoc,doc } from "firebase/firestore";
 const urlapi = "http://localhost:5002"; // Add your API endpoint
 
 const RegisterPage = () => {
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [number, setNumber] = useState("");
@@ -15,33 +17,53 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-  
-    if (!user || !email || !password || !number) {
-      toast.error("⚠️ All fields are required!", { position: "top-center" });
-      return;
-    }
-  
-    try {
-      const response = await axios.post(`${urlapi}/user/register`, {
-        username: user,
-        email,
-        password,
-        phone: number,
-      });
-  
-      console.log("Response:", response.data); // Debugging
-      toast.loading('Loading.....');
+    try{
+      await createUserWithEmailAndPassword(auth, email, password);
+      const user= auth.currentUser;
+      console.log(user);
+      if(user){
+        await setDoc(doc(db, "Users", user.uid), {
+          username: username,
+          email:user.email,
+          phone: number,
+        });
+      }
+      console.log("Registration successful! Redirecting...");
       toast.success("Registration successful! Redirecting...", {
         position: "top-center",
       });
-  
-      setTimeout(() => navigate("/"), 2000);
-    } catch (error) {
-      console.error("Registration Error:", error.response?.data || error.message);
+    }catch(error){
+      console.log(error);
       toast.error(` ${error.response?.data?.error || "Registration failed!"}`, {
         position: "top-center",
       });
     }
+    // if (!user || !email || !password || !number) {
+    //   toast.error("⚠️ All fields are required!", { position: "top-center" });
+    //   return;
+    // }
+  
+    // try {
+    //   const response = await axios.post(`${urlapi}/user/register`, {
+    //     username: user,
+    //     email,
+    //     password,
+    //     phone: number,
+    //   });
+  
+    //   console.log("Response:", response.data); // Debugging
+    //   toast.loading('Loading.....');
+    //   toast.success("Registration successful! Redirecting...", {
+    //     position: "top-center",
+    //   });
+  
+    //   setTimeout(() => navigate("/profile"), 2000);
+    // } catch (error) {
+    //   console.error("Registration Error:", error.response?.data || error.message);
+    //   toast.error(` ${error.response?.data?.error || "Registration failed!"}`, {
+    //     position: "top-center",
+    //   });
+    // }
   };
   
 
@@ -65,7 +87,7 @@ const RegisterPage = () => {
             <input
               type="text"
               placeholder="Username"
-              value={user}
+              value={username}
               onChange={(e) => setUser(e.target.value)}
             />
           </div>

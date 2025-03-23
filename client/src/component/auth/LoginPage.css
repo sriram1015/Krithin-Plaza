@@ -5,14 +5,14 @@
     align-items: center;
     height: 100vh;
     background-color: #f9f9fb;
-    padding: 400px; /* Added padding for better responsiveness */
+    padding: 300px; /* Added padding for better responsiveness */
   }
   
   /* Increased Width of Login Box */
   .login-box {
     display: flex;
-    width: 100%;  /* Increased width from 65% to 80% */
-    max-width: 2500px; /* Increased max-width */
+    width: 200%;  /* Increased width from 65% to 80% */
+    max-width: 3000px; /* Increased max-width */
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
