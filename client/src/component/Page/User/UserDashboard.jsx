@@ -9,6 +9,7 @@ import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { FcAbout } from "react-icons/fc";
 import { auth } from "../../auth/Firebase";
+import {toast} from "react-hot-toast";
 
 const UserDashboard = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
@@ -26,7 +27,8 @@ const UserDashboard = ({ children }) => {
     const handleLogout = async () => {
         try {
             await auth.signOut(); // Sign out the user
-            setIsLoggedIn(false); // Update the state
+            setIsLoggedIn(false);
+            toast.sucess("Logout.....") // Update the state
             navigate('/login'); // Redirect to login page
         } catch (error) {
             console.error("Error during logout:", error);
