@@ -5,9 +5,11 @@ import LoginPage from "./component/auth/Login.jsx";
 import AdminPage from "./component/auth/adminsignin.jsx";
 import SignupPage from "./component/auth/signup.jsx";
 import Home from './component/Page/User/Home.jsx';
-import UserDashboard from './component/Page/User/UserDashboard.jsx'; // Import the UserDashboard
-import Setting from './component/Page/User/Setting.jsx'; // Import the Setting
-import Profile from './component/Page/User/Profile.jsx'; // Import the Profile
+import UserDashboard from './component/Page/User/UserDashboard.jsx'; 
+import Setting from './component/Page/User/Setting.jsx'; 
+import Profile from './component/Page/User/Profile.jsx'; 
+import Cart from './component/Page/User/Cart.jsx'; 
+import About from './component/Page/User/About.jsx'; 
 import './App.css';
 import { auth } from "./component/auth/Firebase";
 const App = () => {
@@ -33,6 +35,8 @@ const App = () => {
               <Route path="/login" element={isLoggedIn ? <Navigate to="/" />:<LoginPage />} />
               <Route path="/setting" element={<Setting />} /> 
               <Route path="/profile" element={<Profile />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
           </UserDashboard>
         </Router>

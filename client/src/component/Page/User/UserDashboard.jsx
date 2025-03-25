@@ -9,7 +9,7 @@ import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { FcAbout } from "react-icons/fc";
 import { auth } from "../../auth/Firebase";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const UserDashboard = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
@@ -53,7 +53,7 @@ const UserDashboard = ({ children }) => {
         <div className="App">
             <section className="flex">
                 {/* Sidebar */}
-                <div className="bg-gray-800 text-white min-h-screen w-40 fixed">
+                <div className="bg-gray-800 text-white min-h-screen w-40 fixed left-0 top-0">
                     <div className="p-4">
                         <HiMenuAlt3 size={28} className="cursor-pointer" />
                     </div>
@@ -63,7 +63,7 @@ const UserDashboard = ({ children }) => {
                                 to={item.link}
                                 key={index}
                                 className="flex items-center gap-6 p-3 hover:bg-gray-700 rounded-md"
-                                onClick={item.action ? item.action : null} // Handle login/logout action
+                                onClick={item.action ? item.action : null}
                             >
                                 <item.icon size={32} />
                                 <span className="text-lg">{item.name}</span>

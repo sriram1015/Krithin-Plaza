@@ -1,6 +1,5 @@
 import React from 'react';
 import Data from './Data';
-import UserDas from './UserDashboard';
 const userdata = [
   { id: 1, name: 'sriram', email: 'email.com', image: 'image.jpg',price:56 },
   { id: 2, name: 'sri', email: 'email.com', image: 'image.jpg' },
